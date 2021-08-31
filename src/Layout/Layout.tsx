@@ -7,15 +7,15 @@ interface LayoutProps {
 }
 
 const Layout = (props: LayoutProps) => (
-  <Body>
+  <Wrapper>
     <Main>
       <Header />
       {props.children}
     </Main>
-  </Body>
+  </Wrapper>
 );
 
-const Body = styled.body`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

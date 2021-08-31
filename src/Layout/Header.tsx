@@ -36,10 +36,16 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   font-size: 30px;
+  @media screen and ${theme.device.tablet} {
+    font-size: 20px;
+  }
 `;
 
 const Timer = styled(Title)`
   font-size: 18px;
+  @media screen and ${theme.device.tablet} {
+    font-size: 15px;
+  }
 `;
 
 export default Header;
