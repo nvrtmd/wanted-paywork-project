@@ -7,14 +7,12 @@ interface LayoutProps {
 }
 
 const Layout = (props: LayoutProps) => (
-  <>
-    <Body>
-      <Main>
-        <Header />
-        {props.children}
-      </Main>
-    </Body>
-  </>
+  <Body>
+    <Main>
+      <Header />
+      {props.children}
+    </Main>
+  </Body>
 );
 
 const Body = styled.body`
@@ -26,9 +24,9 @@ const Body = styled.body`
 
 const Main = styled.main`
   background-color: #4c4eb7;
-  max-width: 650px;
+  max-width: 750px;
   max-height: 900px;
-  width: 45%;
+  width: 65%;
   border-radius: 30px;
   @media screen and ${theme.device.tablet} {
     min-width: 300px;

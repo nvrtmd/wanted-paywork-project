@@ -28,7 +28,7 @@ const Header = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 30px 0;
+  margin: 30px 0 20px;
   color: ${theme.color.white};
 `;
 
