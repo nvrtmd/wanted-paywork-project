@@ -12,7 +12,8 @@ const color = {
   lightPurple: '#8587f3',
   white: '#fff',
   black: '#0b0b0b',
-  pink: '#dd346c',
+  grey: '#C6C6C6',
+  deepGrey: '#414040',
 };
 
 export const theme = {

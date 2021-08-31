@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
 import { Button } from './TodoForm';
@@ -9,34 +9,22 @@ const TodoSort = () => {
     <Wrapper>
       <SortContainer>
         <Title>SORT by</Title>
-
-        {sortBy.status ? (
-          <ActiveBtn
-            onClick={() => setSortBy((prev) => ({ ...prev, status: false }))}
-          >
-            <BtnText>Status</BtnText>
-          </ActiveBtn>
-        ) : (
-          <InactivateBtn
-            onClick={() => setSortBy((prev) => ({ ...prev, status: true }))}
-          >
-            <BtnText>Status</BtnText>
-          </InactivateBtn>
-        )}
-
-        {sortBy.createdAt ? (
-          <ActiveBtn
-            onClick={() => setSortBy((prev) => ({ ...prev, createdAt: false }))}
-          >
-            <BtnText>Created date</BtnText>
-          </ActiveBtn>
-        ) : (
-          <InactivateBtn
-            onClick={() => setSortBy((prev) => ({ ...prev, createdAt: true }))}
-          >
-            <BtnText>Created date</BtnText>
-          </InactivateBtn>
-        )}
+        <SortBtn
+          clicked={sortBy.status}
+          onClick={() =>
+            setSortBy((prev) => ({ ...prev, status: !prev.status }))
+          }
+        >
+          <BtnText>Status</BtnText>
+        </SortBtn>
+        <SortBtn
+          clicked={sortBy.createdAt}
+          onClick={() =>
+            setSortBy((prev) => ({ ...prev, createdAt: !prev.createdAt }))
+          }
+        >
+          <BtnText>Created date</BtnText>
+        </SortBtn>
       </SortContainer>
     </Wrapper>
   );
@@ -45,7 +33,11 @@ const TodoSort = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 15px 0;
+  margin: 15px 0 30px;
+  font-size: 12px;
+  @media screen and ${theme.device.tablet} {
+    font-size: 10px;
+  }
 `;
 
 const SortContainer = styled.div`
@@ -53,7 +45,7 @@ const SortContainer = styled.div`
   justify-content: flex-end;
   min-width: 460px;
   @media screen and ${theme.device.tablet} {
-    min-width: 260px;
+    min-width: 275px;
   }
 `;
 
@@ -64,19 +56,19 @@ const Title = styled.div`
   margin-right: 9px;
 `;
 
-const SortBtn = styled(Button)`
+const SortBtn = styled(Button)<{ clicked: boolean }>`
   padding: 6px;
   border-radius: 10px;
-`;
 
-const ActiveBtn = styled(SortBtn)`
   color: ${theme.color.white};
   background-color: ${theme.color.lightPurple};
-`;
 
-const InactivateBtn = styled(SortBtn)`
-  color: ${theme.color.primary};
-  background-color: ${theme.color.white};
+  ${({ clicked }) =>
+    clicked &&
+    ` {
+      background-color: ${theme.color.primary};
+    }
+  `};
 `;
 
 const BtnText = styled.div`
