@@ -3,13 +3,14 @@ import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
 import useTodo from 'Utils/Hooks/useTodo';
 import { Button } from './TodoForm';
+import { DATA_TYPE } from 'Constants';
 
 const TodoSort = () => {
   const [sortBy, setSortBy] = useState({ status: false, createdAt: false });
   const { sortByStatus, sortByCreatedDate } = useTodo();
 
   const handleClick = (type: string, toggle: boolean) => {
-    if (type === 'status') {
+    if (type === STATUS) {
       sortByStatus(toggle);
       setSortBy({ status: toggle, createdAt: false });
       return;
@@ -24,13 +25,13 @@ const TodoSort = () => {
         <Title>SORT by</Title>
         <SortBtn
           clicked={sortBy.status}
-          onClick={() => handleClick('status', !sortBy.status)}
+          onClick={() => handleClick(STATUS, !sortBy.status)}
         >
           <BtnText>Status</BtnText>
         </SortBtn>
         <SortBtn
           clicked={sortBy.createdAt}
-          onClick={() => handleClick('createdAt', !sortBy.createdAt)}
+          onClick={() => handleClick(CREATED_AT, !sortBy.createdAt)}
         >
           <BtnText>Created date</BtnText>
         </SortBtn>
@@ -85,3 +86,4 @@ const BtnText = styled.div`
 `;
 
 export default TodoSort;
+const { STATUS, CREATED_AT } = DATA_TYPE;

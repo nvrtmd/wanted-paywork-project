@@ -25,14 +25,10 @@ const todoReducer = (state: Itodo[] = initialState, action: Action) => {
 
     case ActionType.SORT_BY_STATUS:
       if (action.payload) {
-        console.log(state);
-
         return [...state]
           .filter((item) => item.isComplete === action.payload)
           .concat(state.filter((item) => item.isComplete !== action.payload));
       } else {
-        console.log(state);
-
         return [...state].sort((a, b) => a.id.localeCompare(b.id));
       }
 
@@ -56,6 +52,7 @@ const todoReducer = (state: Itodo[] = initialState, action: Action) => {
       } else {
         return state;
       }
+
     default:
       return state;
   }

@@ -5,7 +5,15 @@ import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
 import useTodo, { Itodo } from 'Utils/Hooks/useTodo';
 import { dateFormat } from 'Utils/DateFormat';
-
+import {
+  ENTER,
+  DELETE_ICON,
+  CONFIRM_ICON,
+  EDIT_ICON,
+  CHECKED_ICON,
+  NOT_CHECKED_ICON,
+  PLACE_HOLDER,
+} from 'Constants';
 interface TodoItemProps {
   todo: Itodo;
 }
@@ -25,7 +33,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     e: React.KeyboardEvent<HTMLInputElement>,
     id: string,
   ) => {
-    if (e.key === 'Enter') {
+    if (e.key === ENTER) {
       handleTaskNameEdit(id);
     }
   };
@@ -34,7 +42,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     <Wrapper done={todo.isComplete}>
       <CloseBtn>
         <img
-          src="Assets/delete.png"
+          src={DELETE_ICON}
           alt=""
           style={{ width: '12px' }}
           onClick={() => {
@@ -46,7 +54,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
         <div>
           {contentEditMode ? (
             <input
-              placeholder="To do what"
+              placeholder={PLACE_HOLDER}
               onKeyPress={(e) => handleEnterPress(e, todo.id)}
               ref={inputEl}
             />
@@ -59,25 +67,25 @@ const TodoItem = ({ todo }: TodoItemProps) => {
         <CheckBtnContainer>
           {contentEditMode ? (
             <ConfirmBtn
-              src="Assets/confirm.png"
+              src={CONFIRM_ICON}
               onClick={() => handleTaskNameEdit(todo.id)}
             />
           ) : (
-            <TaskNameEditBtn
-              src="Assets/edit.png"
+            <ContentEditBtn
+              src={EDIT_ICON}
               onClick={() => setContentNameEditMode((prev) => !prev)}
             />
           )}
 
           {todo.isComplete ? (
             <CheckBtn
-              src="Assets/checked.png"
+              src={CHECKED_ICON}
               alt=""
               onClick={() => toggleItem(todo.id)}
             />
           ) : (
             <CheckBtn
-              src="Assets/not_checked.png"
+              src={NOT_CHECKED_ICON}
               alt=""
               onClick={() => toggleItem(todo.id)}
             />
@@ -145,6 +153,6 @@ const Button = styled.img`
 `;
 
 const ConfirmBtn = styled(Button)``;
-const TaskNameEditBtn = styled(Button)``;
+const ContentEditBtn = styled(Button)``;
 
 export default TodoItem;

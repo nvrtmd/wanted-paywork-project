@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
 import { clock } from 'Utils/Clock';
 import { useState, useEffect } from 'react';
-
+import { INTERVAL_TIME } from 'Constants';
 const Header = () => {
   const [time, setTime] = useState<string>('');
   useEffect(() => {
@@ -11,7 +11,7 @@ const Header = () => {
 
   setInterval(() => {
     clock(setTime);
-  }, 60000);
+  }, INTERVAL_TIME);
 
   return (
     <>

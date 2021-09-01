@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
-  background-color: #4c4eb7;
+  background-color: ${theme.color.secondary};
   max-width: 750px;
   max-height: 900px;
   width: 65%;

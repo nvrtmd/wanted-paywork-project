@@ -9,8 +9,10 @@ import {
   sortTodoByCreatedDate,
   editContent,
 } from 'Store/ActionCreator/index';
+import { BASE_URL } from 'Config';
 import { RootState } from 'Store/Reducers';
 import { dateFormat } from 'Utils/DateFormat';
+import { DELETE, INITIAL_ID } from 'Constants';
 
 export type Itodo = {
   id: string;
@@ -28,7 +30,7 @@ const useTodo = () => {
 
   const loadData = () => {
     try {
-      axios.get(`http://localhost:4000/todoList`).then((res) => {
+      axios.get(BASE_URL).then((res) => {
         dispatch(updateTodo(res.data));
       });
     } catch (err) {
@@ -41,7 +43,7 @@ const useTodo = () => {
   };
 
   const toggleItem = (id: string) => {
-    console.log('detele');
+    console.log(DELETE);
     dispatch(toggleTodo(id));
   };
 
@@ -51,7 +53,7 @@ const useTodo = () => {
     const lastIdIdx = todoList.length;
 
     if (lastIdIdx < 1) {
-      todo.id = '1';
+      todo.id = INITIAL_ID;
       dispatch(addTodo(todo));
       return;
     }

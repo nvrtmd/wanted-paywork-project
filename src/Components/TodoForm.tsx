@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
 import useTodo from 'Utils/Hooks/useTodo';
+import { ADD_ICON } from 'Constants';
 
 const TodoForm = () => {
   const [content, setContent] = useState<string>('');
@@ -14,7 +15,7 @@ const TodoForm = () => {
   };
 
   const handleAddItem = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault(); // 새로고침 방지
+    e.preventDefault();
     addItem({ id: '', content: content, createdAt: '', isComplete: false });
     setContent('');
   };
@@ -26,7 +27,7 @@ const TodoForm = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInput(e)}
       />
       <AddBtn onClick={(e: React.MouseEvent<HTMLElement>) => handleAddItem(e)}>
-        <img src="Assets/add.png" alt="" style={{ width: '25px' }}></img>
+        <img src={ADD_ICON} alt="" style={{ width: '25px' }}></img>
       </AddBtn>
     </Wrapper>
   );
