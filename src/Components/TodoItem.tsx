@@ -3,34 +3,47 @@
 import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
+import { Itodo } from 'Utils/Hooks/useTodo';
+import { useSelector, useDispatch } from 'react-redux';
+import useTodo from 'Utils/Hooks/useTodo';
+import { dateFormat } from 'Utils/DateFormat';
 
-const TodoItem = () => {
-  const [done, setDone] = useState(false);
+interface TodoItemProps {
+  todo: Itodo;
+}
+
+const TodoItem = ({ todo }: TodoItemProps) => {
+  const { deleteItem, toggleItem } = useTodo();
 
   return (
-    <Wrapper done={done}>
+    <Wrapper done={todo.isComplete}>
       <CloseBtn>
-        <img src="Assets/delete.png" alt="" style={{ width: '12px' }} />
+        <img
+          src="Assets/delete.png"
+          alt=""
+          style={{ width: '12px' }}
+          onClick={() => {
+            deleteItem(todo.id);
+          }}
+        />
       </CloseBtn>
       <TodoContents>
         <div>
-          <TaskName>
-            할일할일할일할일할일할일할일할일할일할일할일할일할일할일할일
-          </TaskName>
-          <DueDateBox>언제부터 언제까지</DueDateBox>
+          <TaskName>{todo.content}</TaskName>
+          <DueDateBox>{dateFormat(todo.createdAt)}</DueDateBox>
         </div>
         <CheckBtnContainer>
-          {done ? (
+          {todo.isComplete ? (
             <CheckBtn
               src="Assets/checked.png"
               alt=""
-              onClick={() => setDone((prev) => !prev)}
+              onClick={() => toggleItem(todo.id)}
             />
           ) : (
             <CheckBtn
               src="Assets/not_checked.png"
               alt=""
-              onClick={() => setDone((prev) => !prev)}
+              onClick={() => toggleItem(todo.id)}
             />
           )}
         </CheckBtnContainer>
