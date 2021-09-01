@@ -9,6 +9,12 @@ const TodoSort = () => {
   const [sortBy, setSortBy] = useState({ status: false, createdAt: false });
   const { sortByStatus, sortByCreatedDate } = useTodo();
 
+  // 두 개의 정렬 버튼 중 하나를 클릭했을 때,
+  // 해당 버튼의 타입(상태 기준 정렬인지, 작성일 기준 정렬인지)을 기준으로 분기
+  // 타입이 status일 경우 sortByStatus 함수의 인자로 toggle(!sortBy.status)값을 삽입
+  // sortBy state값을 toggle값으로 업데이트
+  // 만약 다른 버튼이 클릭된 후 해당 버튼이 눌린 것일수도 있으니 다른 버튼의 state 값은 false로 변경
+  // 타입이 createdAt인 경우도 동일하게 작동
   const handleClick = (type: string, toggle: boolean) => {
     if (type === STATUS) {
       sortByStatus(toggle);

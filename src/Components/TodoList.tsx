@@ -13,10 +13,10 @@ const TodoList = () => {
     loadData();
   }, []);
 
+  // Todo List state를 useSelector을 통해 가져와서 변수에 할당
   const todoList = useSelector((state: RootState) => {
     return state.todo;
   });
-  console.log(todoList);
 
   return (
     <Wrapper>
