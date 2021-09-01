@@ -1,27 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { toggleTodo } from 'Store/ActionCreator';
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
+import useTodo from 'Utils/Hooks/useTodo';
 import { Button } from './TodoForm';
 
 const TodoSort = () => {
   const [sortBy, setSortBy] = useState({ status: false, createdAt: false });
+  const { sortByStatus, sortByCreatedDate } = useTodo();
+
+  const handleClick = (type: string, toggle: boolean) => {
+    if (type === 'status') {
+      sortByStatus(toggle);
+      setSortBy({ status: toggle, createdAt: false });
+      return;
+    }
+    sortByCreatedDate(toggle);
+    setSortBy({ status: false, createdAt: toggle });
+  };
+
   return (
     <Wrapper>
       <SortContainer>
         <Title>SORT by</Title>
         <SortBtn
           clicked={sortBy.status}
-          onClick={() =>
-            setSortBy((prev) => ({ ...prev, status: !prev.status }))
-          }
+          onClick={() => handleClick('status', !sortBy.status)}
         >
           <BtnText>Status</BtnText>
         </SortBtn>
         <SortBtn
           clicked={sortBy.createdAt}
-          onClick={() =>
-            setSortBy((prev) => ({ ...prev, createdAt: !prev.createdAt }))
-          }
+          onClick={() => handleClick('createdAt', !sortBy.createdAt)}
         >
           <BtnText>Created date</BtnText>
         </SortBtn>

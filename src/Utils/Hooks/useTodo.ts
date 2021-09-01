@@ -1,7 +1,15 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateTodo, deleteTodo, toggleTodo } from 'Store/ActionCreator/index';
+import {
+  updateTodo,
+  deleteTodo,
+  toggleTodo,
+  addTodo,
+  sortTodoByStatus,
+  sortTodoByCreatedDate,
+} from 'Store/ActionCreator/index';
+import { RootState } from 'Store/Reducers';
+import { dateFormat } from 'Utils/DateFormat';
 
 export type Itodo = {
   id: string;
@@ -12,9 +20,10 @@ export type Itodo = {
 
 const useTodo = () => {
   const dispatch = useDispatch();
-  // const todoList = useSelector((state: RootState) => {
-  //   return state.todo;
-  // });
+
+  const todoList = useSelector((state: RootState) => {
+    return state.todo;
+  });
 
   const loadData = () => {
     try {
@@ -35,10 +44,36 @@ const useTodo = () => {
     dispatch(toggleTodo(id));
   };
 
+  const addItem = (todo: Itodo) => {
+    const createdDate = dateFormat(new Date().toISOString());
+    todo.createdAt = createdDate;
+    const lastIdIdx = todoList.length;
+
+    if (lastIdIdx < 1) {
+      todo.id = '1';
+      dispatch(addTodo(todo));
+      return;
+    }
+
+    const nextId = todoList[lastIdIdx - 1].id + 1;
+    todo.id = nextId;
+    dispatch(addTodo(todo));
+  };
+
+  const sortByStatus = (toggle: boolean) => {
+    dispatch(sortTodoByStatus(toggle));
+  };
+  const sortByCreatedDate = (toggle: boolean) => {
+    dispatch(sortTodoByCreatedDate(toggle));
+  };
+
   return {
     loadData,
     deleteItem,
     toggleItem,
+    addItem,
+    sortByStatus,
+    sortByCreatedDate,
   };
 };
 

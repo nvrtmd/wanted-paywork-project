@@ -2,16 +2,16 @@ import { Action } from 'Store/Actions';
 import { ActionType } from 'Store/ActionTypes';
 import { Itodo } from 'Utils/Hooks/useTodo';
 
-const initialState = [
-  { id: '', content: '', isComplete: false, createdAt: '' },
-];
+const initialState: Itodo[] = [];
 
 const todoReducer = (state: Itodo[] = initialState, action: Action) => {
   switch (action.type) {
     case ActionType.UPDATE:
       return action.payload;
+
     case ActionType.DELETE:
       return state.filter((item) => item.id !== action.payload);
+
     case ActionType.TOGGLE:
       return state.map((item) => {
         if (item.id === action.payload) {
@@ -19,6 +19,36 @@ const todoReducer = (state: Itodo[] = initialState, action: Action) => {
         }
         return item;
       });
+
+    case ActionType.ADD:
+      return state.concat(action.payload);
+
+    case ActionType.SORT_BY_STATUS:
+      if (action.payload) {
+        console.log(state);
+
+        return [...state]
+          .filter((item) => item.isComplete === action.payload)
+          .concat(state.filter((item) => item.isComplete !== action.payload));
+      } else {
+        console.log(state);
+
+        return [...state].sort((a, b) => a.id.localeCompare(b.id));
+      }
+
+    case ActionType.SORT_BY_CREATED_DATE:
+      if (action.payload) {
+        console.log(state);
+
+        return [...state].sort((a, b) =>
+          a.createdAt.localeCompare(b.createdAt),
+        );
+      } else {
+        console.log(state);
+
+        return [...state].sort((a, b) => a.id.localeCompare(b.id));
+      }
+
     default:
       return state;
   }

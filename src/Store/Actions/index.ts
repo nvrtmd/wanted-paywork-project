@@ -16,4 +16,25 @@ interface ToggleAction {
   payload: string;
 }
 
-export type Action = UpdateAction | DeleteAction | ToggleAction;
+interface AddAction {
+  type: ActionType.ADD;
+  payload: Itodo;
+}
+
+interface SortByStatusAction {
+  type: ActionType.SORT_BY_STATUS;
+  payload: boolean;
+}
+
+interface SortByCreatedDate {
+  type: ActionType.SORT_BY_CREATED_DATE;
+  payload: boolean;
+}
+
+export type Action =
+  | UpdateAction
+  | DeleteAction
+  | ToggleAction
+  | AddAction
+  | SortByStatusAction
+  | SortByCreatedDate;

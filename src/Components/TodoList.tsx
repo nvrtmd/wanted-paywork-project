@@ -1,13 +1,14 @@
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
-import useTodo from 'Utils/Hooks/useTodo';
+import useTodo, { Itodo } from 'Utils/Hooks/useTodo';
 import TodoItem from './TodoItem';
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { RootState } from 'Store/Reducers';
 
 const TodoList = () => {
   const { loadData } = useTodo();
+
   useEffect(() => {
     loadData();
   }, []);
@@ -20,7 +21,7 @@ const TodoList = () => {
   return (
     <Wrapper>
       <TodoItemContainer>
-        {todoList.map((item, index) => (
+        {todoList.map((item: Itodo, index: number) => (
           <TodoItem todo={item} key={index} />
         ))}
       </TodoItemContainer>

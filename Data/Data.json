@@ -1,80 +1,58 @@
 {
   "todoList": [
     {
+      "id": "1",
+      "content": "과제1 하기",
       "isComplete": false,
-      "id": "1"
+      "createdAt": "2021-05-26T11:51:05.097Z"
+    },
+    {
+      "id": "2",
+      "content": "과제2 하기",
+      "isComplete": true,
+      "createdAt": "2021-05-27T11:51:05.097Z"
     },
     {
       "id": "3",
       "content": "과제3 하기",
       "isComplete": true,
-      "createdAt": "2021-05-26T11:51:05.097Z"
+      "createdAt": "2021-05-28T11:51:05.097Z"
     },
     {
       "id": "4",
       "content": "과제4 하기",
       "isComplete": false,
-      "createdAt": "2021-05-26T16:15:25.729Z"
+      "createdAt": "2021-05-29T16:15:25.729Z"
     },
     {
       "id": "5",
       "content": "과제5 하기",
       "isComplete": true,
-      "createdAt": "2021-05-26T11:51:05.097Z"
+      "createdAt": "2021-05-20T11:51:05.097Z"
     },
     {
       "id": "6",
       "content": "과제6 하기",
       "isComplete": false,
-      "createdAt": "2021-05-26T16:15:25.729Z"
+      "createdAt": "2021-05-16T16:15:25.729Z"
     },
     {
       "id": "7",
       "content": "과제7 하기",
       "isComplete": true,
-      "createdAt": "2021-05-26T11:51:05.097Z"
+      "createdAt": "2021-05-13T11:51:05.097Z"
     },
     {
       "id": "8",
       "content": "과제8 하기",
       "isComplete": false,
-      "createdAt": "2021-05-26T16:15:25.729Z"
+      "createdAt": "2021-05-11T16:15:25.729Z"
     },
     {
+      "id": "9",
       "content": "과제9 하기",
       "isComplete": false,
-      "createdAt": "2021-05-26T11:51:05.097Z",
-      "id": "kbIjs9Y"
-    },
-    {
-      "content": "과제9 하기",
-      "isDone": false,
-      "createdAt": "2021-05-26T11:51:05.097Z",
-      "id": "msnodq7"
-    },
-    {
-      "content": "과제9 하기",
-      "isDone": false,
-      "createdAt": "2021-05-26T11:51:05.097Z",
-      "id": "o4QangR"
-    },
-    {
-      "content": "과제9 하기",
-      "isDone": false,
-      "createdAt": "2021-05-26T11:51:05.097Z",
-      "id": "yoWX_Lc"
-    },
-    {
-      "  {\r\n    \"content\": \"와우\",\r\n  }\r\n": "",
-      "id": "OJ2eivG"
-    },
-    {
-      " \"content\": \"와우\",\r\n \r\n": "",
-      "id": "4aADdv8"
-    },
-    {
-      "content": "와우",
-      "id": "w0R4yqa"
+      "createdAt": "2021-05-05T11:51:05.097Z"
     }
   ]
 }

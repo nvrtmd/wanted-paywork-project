@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
-import { Itodo } from 'Utils/Hooks/useTodo';
-import { useSelector, useDispatch } from 'react-redux';
-import useTodo from 'Utils/Hooks/useTodo';
+import useTodo, { Itodo } from 'Utils/Hooks/useTodo';
 import { dateFormat } from 'Utils/DateFormat';
 
 interface TodoItemProps {
@@ -70,6 +67,7 @@ const Wrapper = styled.div<{ done: boolean }>`
 const CloseBtn = styled.div`
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
 `;
 
 const TodoContents = styled.div`
@@ -87,6 +85,7 @@ const CheckBtnContainer = styled.div`
 
 const CheckBtn = styled.img`
   width: 30px;
+  cursor: pointer;
 `;
 
 const TaskName = styled.div`

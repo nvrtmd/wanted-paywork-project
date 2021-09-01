@@ -1,19 +1,13 @@
-import styled from 'styled-components/macro';
-import { theme } from 'Styles/Theme';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import TodoSort from './TodoSort';
 
 const TodoContainer = () => (
-  <Wrapper>
+  <div>
     <TodoForm />
     <TodoSort />
     <TodoList />
-  </Wrapper>
+  </div>
 );
-
-const Wrapper = styled.div`
-  /* color: ${theme.color.white}; */
-`;
 
 export default TodoContainer;

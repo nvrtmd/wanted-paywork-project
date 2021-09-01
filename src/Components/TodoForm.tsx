@@ -1,15 +1,36 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
+import useTodo from 'Utils/Hooks/useTodo';
 
-const TodoForm = () => (
-  <Wrapper>
-    {' '}
-    <InputBox />
-    <AddBtn>
-      <img src="Assets/add.png" alt="" style={{ width: '25px' }}></img>
-    </AddBtn>
-  </Wrapper>
-);
+const TodoForm = () => {
+  const [content, setContent] = useState<string>('');
+  const { addItem } = useTodo();
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setContent(e.target.value);
+  };
+
+  const handleAddItem = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault(); // 새로고침 방지
+    addItem({ id: '', content: content, createdAt: '', isComplete: false });
+    setContent('');
+  };
+
+  return (
+    <Wrapper>
+      <InputBox
+        value={content}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInput(e)}
+      />
+      <AddBtn onClick={(e: React.MouseEvent<HTMLElement>) => handleAddItem(e)}>
+        <img src="Assets/add.png" alt="" style={{ width: '25px' }}></img>
+      </AddBtn>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   display: flex;
