@@ -20,21 +20,25 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo }: TodoItemProps) => {
   const { deleteItem, toggleItem, editItemContent } = useTodo();
-  const [contentEditMode, setContentNameEditMode] = useState<boolean>(false);
+  const [contentEditMode, setContentEditMode] = useState<boolean>(false);
   const inputEl = useRef<HTMLInputElement>(null);
 
-  const handleTaskNameEdit = (id: string) => {
+  // 수정할 todo item의 id와 input의 내용물(=== 수정할 할일 내용)을
+  // editItemContent 함수의 인자로 삽입
+  // confirm button을 클릭해 입력을 마쳤으므로 contentEditMode state를 false로 변경
+  const handleContentEdit = (id: string) => {
     const newContent = inputEl.current?.value || '';
     editItemContent(id, newContent);
-    setContentNameEditMode(false);
+    setContentEditMode(false);
   };
 
+  // Enter key를 눌렀을 때도 수정이 가능하도록 함수 작성
   const handleEnterPress = (
     e: React.KeyboardEvent<HTMLInputElement>,
     id: string,
   ) => {
     if (e.key === ENTER) {
-      handleTaskNameEdit(id);
+      handleContentEdit(id);
     }
   };
 
@@ -68,12 +72,12 @@ const TodoItem = ({ todo }: TodoItemProps) => {
           {contentEditMode ? (
             <ConfirmBtn
               src={CONFIRM_ICON}
-              onClick={() => handleTaskNameEdit(todo.id)}
+              onClick={() => handleContentEdit(todo.id)}
             />
           ) : (
             <ContentEditBtn
               src={EDIT_ICON}
-              onClick={() => setContentNameEditMode((prev) => !prev)}
+              onClick={() => setContentEditMode((prev) => !prev)}
             />
           )}
 

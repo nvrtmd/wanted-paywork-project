@@ -5,10 +5,12 @@ import { useState, useEffect } from 'react';
 import { INTERVAL_TIME } from 'Constants';
 const Header = () => {
   const [time, setTime] = useState<string>('');
+
   useEffect(() => {
     clock(setTime);
   }, []);
 
+  // 1분에 한 번 현재 시간 업데이트
   setInterval(() => {
     clock(setTime);
   }, INTERVAL_TIME);

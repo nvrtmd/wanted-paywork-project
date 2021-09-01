@@ -10,10 +10,15 @@ const TodoForm = () => {
   const [content, setContent] = useState<string>('');
   const { addItem } = useTodo();
 
+  // content state에 input으로 받는 todo item content를 저장
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value);
   };
 
+  // 추가 버튼을 클릭할 시 새로운 todo item이 추가될 수 있도록
+  // addItem 함수에 인자로 넘기기
+  // 이때, 작성일과 id는 addItem 함수 내에서 처리 후 삽입할 예정이므로 빈 값을 삽입함
+  // input의 내용물은 추가 버튼 클릭 시 clear 될 수 있도록 처리
   const handleAddItem = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     addItem({ id: '', content: content, createdAt: '', isComplete: false });
