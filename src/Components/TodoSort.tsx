@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { toggleTodo } from 'Store/ActionCreator';
+import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
 import useTodo from 'Utils/Hooks/useTodo';

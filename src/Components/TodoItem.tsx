@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useState, useRef } from 'react';
 import styled from 'styled-components/macro';
 import { theme } from 'Styles/Theme';
 import useTodo, { Itodo } from 'Utils/Hooks/useTodo';
@@ -10,7 +11,24 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({ todo }: TodoItemProps) => {
-  const { deleteItem, toggleItem } = useTodo();
+  const { deleteItem, toggleItem, editItemContent } = useTodo();
+  const [contentEditMode, setContentNameEditMode] = useState<boolean>(false);
+  const inputEl = useRef<HTMLInputElement>(null);
+
+  const handleTaskNameEdit = (id: string) => {
+    const newContent = inputEl.current?.value || '';
+    editItemContent(id, newContent);
+    setContentNameEditMode(false);
+  };
+
+  const handleEnterPress = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    id: string,
+  ) => {
+    if (e.key === 'Enter') {
+      handleTaskNameEdit(id);
+    }
+  };
 
   return (
     <Wrapper done={todo.isComplete}>
@@ -26,10 +44,31 @@ const TodoItem = ({ todo }: TodoItemProps) => {
       </CloseBtn>
       <TodoContents>
         <div>
-          <TaskName>{todo.content}</TaskName>
+          {contentEditMode ? (
+            <input
+              placeholder="To do what"
+              onKeyPress={(e) => handleEnterPress(e, todo.id)}
+              ref={inputEl}
+            />
+          ) : (
+            <TaskName>{todo.content}</TaskName>
+          )}
+
           <DueDateBox>{dateFormat(todo.createdAt)}</DueDateBox>
         </div>
         <CheckBtnContainer>
+          {contentEditMode ? (
+            <ConfirmBtn
+              src="Assets/confirm.png"
+              onClick={() => handleTaskNameEdit(todo.id)}
+            />
+          ) : (
+            <TaskNameEditBtn
+              src="Assets/edit.png"
+              onClick={() => setContentNameEditMode((prev) => !prev)}
+            />
+          )}
+
           {todo.isComplete ? (
             <CheckBtn
               src="Assets/checked.png"
@@ -98,5 +137,14 @@ const DueDateBox = styled.div`
   margin-top: 10px;
   font-size: 14px;
 `;
+
+const Button = styled.img`
+  width: 20px;
+  margin: 0px 10px;
+  cursor: pointer;
+`;
+
+const ConfirmBtn = styled(Button)``;
+const TaskNameEditBtn = styled(Button)``;
 
 export default TodoItem;

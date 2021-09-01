@@ -38,17 +38,24 @@ const todoReducer = (state: Itodo[] = initialState, action: Action) => {
 
     case ActionType.SORT_BY_CREATED_DATE:
       if (action.payload) {
-        console.log(state);
-
         return [...state].sort((a, b) =>
           a.createdAt.localeCompare(b.createdAt),
         );
       } else {
-        console.log(state);
-
         return [...state].sort((a, b) => a.id.localeCompare(b.id));
       }
 
+    case ActionType.EDIT_CONTENT:
+      if (action.payload.content) {
+        return state.map((item) => {
+          if (item.id === action.payload.id) {
+            item.content = action.payload.content;
+          }
+          return item;
+        });
+      } else {
+        return state;
+      }
     default:
       return state;
   }

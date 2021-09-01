@@ -30,6 +30,10 @@ interface SortByCreatedDate {
   type: ActionType.SORT_BY_CREATED_DATE;
   payload: boolean;
 }
+interface EditContent {
+  type: ActionType.EDIT_CONTENT;
+  payload: { id: string; content: string };
+}
 
 export type Action =
   | UpdateAction
@@ -37,4 +41,5 @@ export type Action =
   | ToggleAction
   | AddAction
   | SortByStatusAction
-  | SortByCreatedDate;
+  | SortByCreatedDate
+  | EditContent;

@@ -42,3 +42,10 @@ export const sortTodoByCreatedDate = (toggle: boolean) => {
     payload: toggle,
   };
 };
+
+export const editContent = (id: string, content: string) => {
+  return {
+    type: ActionType.EDIT_CONTENT,
+    payload: { id, content },
+  };
+};

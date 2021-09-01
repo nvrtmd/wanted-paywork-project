@@ -7,6 +7,7 @@ import {
   addTodo,
   sortTodoByStatus,
   sortTodoByCreatedDate,
+  editContent,
 } from 'Store/ActionCreator/index';
 import { RootState } from 'Store/Reducers';
 import { dateFormat } from 'Utils/DateFormat';
@@ -63,8 +64,13 @@ const useTodo = () => {
   const sortByStatus = (toggle: boolean) => {
     dispatch(sortTodoByStatus(toggle));
   };
+
   const sortByCreatedDate = (toggle: boolean) => {
     dispatch(sortTodoByCreatedDate(toggle));
+  };
+
+  const editItemContent = (id: string, content: string) => {
+    dispatch(editContent(id, content));
   };
 
   return {
@@ -74,6 +80,7 @@ const useTodo = () => {
     addItem,
     sortByStatus,
     sortByCreatedDate,
+    editItemContent,
   };
 };
 
